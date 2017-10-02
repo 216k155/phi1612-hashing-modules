@@ -33,4 +33,27 @@ static PyObject *phi1612_getpowhash(PyObject *self, PyObject *args)
     return value;
 }
 
+static PyMethodDef Phi1612Methods[] = {
+    { "getPoWHash", phi1612_getpowhash, METH_VARARGS, "Returns the proof of work hash using phi1612 hash" },
+    { NULL, NULL, 0, NULL }
+};
 
+#if PY_MAJOR_VERSION >= 3
+static struct PyModuleDef Phi1612Module = {
+    PyModuleDef_HEAD_INIT,
+    "phi1612_hash",
+    "...",
+    -1,
+    Phi1612Methods
+};
+
+PyMODINIT_FUNC PyInit_phi1612_hash(void) {
+    return PyModule_Create(&Phi1612Module);
+}
+
+#else
+
+PyMODINIT_FUNC initphi1612_hash(void) {
+    (void) Py_InitModule("phi1612_hash", Phi1612Methods);
+}
+#endif
